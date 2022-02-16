@@ -9,5 +9,5 @@ module application.javafx2 {
     exports gui;
     opens model.entities to javafx.fxml;
     exports model.entities;
-    
+
 }

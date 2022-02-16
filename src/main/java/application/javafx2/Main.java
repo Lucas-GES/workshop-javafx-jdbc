@@ -9,18 +9,29 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+
+    private static Scene mainScene;
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("View.fxml"));
-        ScrollPane scrollPane = fxmlLoader.load();
+    public void start(Stage stage)  {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("View.fxml"));
+            ScrollPane scrollPane = null;
+            scrollPane = fxmlLoader.load();
+            scrollPane.setFitToHeight(true);
+            scrollPane.setFitToWidth(true);
 
-        scrollPane.setFitToHeight(true);
-        scrollPane.setFitToWidth(true);
+            mainScene = new Scene(scrollPane);
+            stage.setScene(mainScene);
+            stage.setTitle("Sample JavaFX application");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        Scene mainScene = new Scene(scrollPane);
-        stage.setScene(mainScene);
-        stage.setTitle("Sample JavaFX application");
-        stage.show();
+    public static Scene getMainScene(){
+        return mainScene;
     }
 
     public static void main(String[] args) {

@@ -5,5 +5,7 @@ module application.javafx2 {
 
     opens application.javafx2 to javafx.fxml;
     exports application.javafx2;
+    opens gui to javafx.fxml;
+    exports gui;
 
 }

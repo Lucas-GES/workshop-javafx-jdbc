@@ -7,5 +7,7 @@ module application.javafx2 {
     exports application.javafx2;
     opens gui to javafx.fxml;
     exports gui;
-
+    opens model.entities to javafx.fxml;
+    exports model.entities;
+    
 }

@@ -1,6 +1,5 @@
 package model.dao.impl;
 
-import db.DB;
 import db.DbException;
 import model.dao.SellerDao;
 import model.entities.Department;
@@ -116,7 +115,7 @@ public class SellerDaoJDBC implements SellerDao {
         obj.setName(rs.getString("Name"));
         obj.setEmail(rs.getString("Email"));
         obj.setBaseSalary(rs.getDouble("BaseSalary"));
-        obj.setBirthdate(rs.getDate("BirthDate"));
+        obj.setBirthDate(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
         obj.setDepartment(dep);
         return obj;
     }

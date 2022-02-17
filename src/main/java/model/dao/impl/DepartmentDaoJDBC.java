@@ -22,13 +22,12 @@ public class DepartmentDaoJDBC implements DepartmentDao {
     @Override
     public void insert(Department obj) {
         String query = "INSERT INTO department "
-                + "(Name, Id) "
+                + "(Name) "
                 + "VALUES "
-                + "(?, ?)";
+                + "(?)";
         try(PreparedStatement st = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
 
             st.setString(1, obj.getName());
-            st.setInt(2, obj.getId());
 
             int rowsAffected = st.executeUpdate();
 
@@ -50,13 +49,12 @@ public class DepartmentDaoJDBC implements DepartmentDao {
     @Override
     public void update(Department obj) {
         String query = "UPDATE department "
-                + "SET Name = ?, Id = ? "
+                + "SET Name = ? "
                 + "WHERE Id = ?";
         try(PreparedStatement st = conn.prepareStatement(query)){
 
             st.setString(1, obj.getName());
             st.setInt(2, obj.getId());
-            st.setInt(3, obj.getId());
 
             st.executeUpdate();
 
@@ -80,9 +78,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
     @Override
     public Department findById(Integer id) {
-        String query = "SELECT department.*,department.Name as DepName "
-                + "FROM department "
-                + "WHERE department.Id = ?";
+        String query = "SELECT * FROM department WHERE Id = ?";
         try(PreparedStatement st = conn.prepareStatement(query)){
             st.setInt(1, id);
             try(ResultSet rs = st.executeQuery()) {
